@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "Student"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "StudentId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Active": {
+      "type": "boolean"
+    },
+    "pick_up_point": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::pick-up-point.pick-up-point",
+      "inversedBy": "students"
+    },
+    "receipts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::receipt.receipt",
+      "mappedBy": "student"
+    },
+    "boarding_passes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::boarding-pass.boarding-pass",
+      "mappedBy": "student"
+    }
+  }
+}

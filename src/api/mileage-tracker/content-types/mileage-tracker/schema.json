@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mileage_trackers",
+  "info": {
+    "singularName": "mileage-tracker",
+    "pluralName": "mileage-trackers",
+    "displayName": "Mileage Tracker"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "NumberPlate": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "StartMileage": {
+      "type": "integer"
+    },
+    "EndMileage": {
+      "type": "integer"
+    }
+  }
+}

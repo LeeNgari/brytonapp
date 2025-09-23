@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "boarding_passes",
+  "info": {
+    "singularName": "boarding-pass",
+    "pluralName": "boarding-passes",
+    "displayName": "Boarding Pass"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "student": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::student.student",
+      "inversedBy": "boarding_passes"
+    },
+    "receipt": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::receipt.receipt"
+    },
+    "Qr": {
+      "type": "uid"
+    }
+  },
+  "config": {
+    "displayedAttribute": "QrCode"
+  }
+}
