@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "work_sheets",
+  "info": {
+    "singularName": "work-sheet",
+    "pluralName": "work-sheets",
+    "displayName": "Work Sheet"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "DepartureDate": {
+      "type": "date"
+    },
+    "ArrivalDate": {
+      "type": "date"
+    },
+    "Origin": {
+      "type": "string"
+    },
+    "Destination": {
+      "type": "string"
+    },
+    "Purpose": {
+      "type": "string"
+    },
+    "OdometerStart": {
+      "type": "integer"
+    },
+    "OdometerEnd": {
+      "type": "integer"
+    },
+    "Mileage": {
+      "type": "integer"
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "work_sheets"
+    },
+    "driver": {
+  "type": "relation",
+  "relation": "manyToOne",
+  "target": "api::driver.driver",
+  "inversedBy": "work_sheets"
+},
+    "vehicle": {
+  "type": "relation",
+  "relation": "manyToOne",
+  "target": "api::vehicle.vehicle",
+  "inversedBy": "work_sheets"
+}
+  }
+}

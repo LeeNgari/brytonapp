@@ -35,5 +35,7 @@
       "target": "api::receipt.receipt",
       "mappedBy": "semester"
     }
+  }, "config": {
+    "displayedAttribute": "Name"
   }
 }

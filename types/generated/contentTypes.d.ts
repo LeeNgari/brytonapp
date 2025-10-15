@@ -404,6 +404,116 @@ export interface ApiBoardingPassBoardingPass
   };
 }
 
+export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
+  collectionName: 'customers';
+  info: {
+    displayName: 'Customer';
+    pluralName: 'customers';
+    singularName: 'customer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Address: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Department: Schema.Attribute.String;
+    Email: Schema.Attribute.Email;
+    invoices: Schema.Attribute.Relation<'oneToMany', 'api::invoice.invoice'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::customer.customer'
+    > &
+      Schema.Attribute.Private;
+    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    quotations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quotation.quotation'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    work_sheets: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-sheet.work-sheet'
+    >;
+  };
+}
+
+export interface ApiDriverDriver extends Struct.CollectionTypeSchema {
+  collectionName: 'drivers';
+  info: {
+    displayName: 'Driver';
+    pluralName: 'drivers';
+    singularName: 'driver';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    FullName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::driver.driver'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    work_sheets: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-sheet.work-sheet'
+    >;
+  };
+}
+
+export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
+  collectionName: 'invoices';
+  info: {
+    displayName: 'Invoice';
+    pluralName: 'invoices';
+    singularName: 'invoice';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BankDetails: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
+    Description: Schema.Attribute.RichText;
+    InvoiceDate: Schema.Attribute.Date;
+    InvoiceNumber: Schema.Attribute.String & Schema.Attribute.Unique;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::invoice.invoice'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    quotation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::quotation.quotation'
+    >;
+    TotalAmount: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMileageTrackerMileageTracker
   extends Struct.CollectionTypeSchema {
   collectionName: 'mileage_trackers';
@@ -492,6 +602,40 @@ export interface ApiPricePrice extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     semester: Schema.Attribute.Relation<'manyToOne', 'api::semester.semester'>;
     TotalAmount: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiQuotationQuotation extends Struct.CollectionTypeSchema {
+  collectionName: 'quotations';
+  info: {
+    displayName: 'Quotation';
+    pluralName: 'quotations';
+    singularName: 'quotation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
+    Description: Schema.Attribute.RichText;
+    invoice: Schema.Attribute.Relation<'oneToOne', 'api::invoice.invoice'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quotation.quotation'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    QuoteDate: Schema.Attribute.Date;
+    QuoteNumber: Schema.Attribute.String & Schema.Attribute.Unique;
+    Terms: Schema.Attribute.Text;
+    TotalAmount: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -606,6 +750,76 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVehicleVehicle extends Struct.CollectionTypeSchema {
+  collectionName: 'vehicles';
+  info: {
+    displayName: 'Vehicle';
+    pluralName: 'vehicles';
+    singularName: 'vehicle';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::vehicle.vehicle'
+    > &
+      Schema.Attribute.Private;
+    NumberPlate: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    work_sheets: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-sheet.work-sheet'
+    >;
+  };
+}
+
+export interface ApiWorkSheetWorkSheet extends Struct.CollectionTypeSchema {
+  collectionName: 'work_sheets';
+  info: {
+    displayName: 'Work Sheet';
+    pluralName: 'work-sheets';
+    singularName: 'work-sheet';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ArrivalDate: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customer: Schema.Attribute.Relation<'manyToOne', 'api::customer.customer'>;
+    DepartureDate: Schema.Attribute.Date;
+    Destination: Schema.Attribute.String;
+    driver: Schema.Attribute.Relation<'manyToOne', 'api::driver.driver'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::work-sheet.work-sheet'
+    > &
+      Schema.Attribute.Private;
+    Mileage: Schema.Attribute.Integer;
+    OdometerEnd: Schema.Attribute.Integer;
+    OdometerStart: Schema.Attribute.Integer;
+    Origin: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    Purpose: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    vehicle: Schema.Attribute.Relation<'manyToOne', 'api::vehicle.vehicle'>;
   };
 }
 
@@ -1119,12 +1333,18 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::boarding-pass.boarding-pass': ApiBoardingPassBoardingPass;
+      'api::customer.customer': ApiCustomerCustomer;
+      'api::driver.driver': ApiDriverDriver;
+      'api::invoice.invoice': ApiInvoiceInvoice;
       'api::mileage-tracker.mileage-tracker': ApiMileageTrackerMileageTracker;
       'api::pick-up-point.pick-up-point': ApiPickUpPointPickUpPoint;
       'api::price.price': ApiPricePrice;
+      'api::quotation.quotation': ApiQuotationQuotation;
       'api::receipt.receipt': ApiReceiptReceipt;
       'api::semester.semester': ApiSemesterSemester;
       'api::student.student': ApiStudentStudent;
+      'api::vehicle.vehicle': ApiVehicleVehicle;
+      'api::work-sheet.work-sheet': ApiWorkSheetWorkSheet;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customers",
+  "info": {
+    "singularName": "customer",
+    "pluralName": "customers",
+    "displayName": "Customer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Department": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Phone": {
+      "type": "string"
+    },
+    "Address": {
+      "type": "text"
+    },
+    "quotations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quotation.quotation",
+      "mappedBy": "customer"
+    },
+    "invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::invoice.invoice",
+      "mappedBy": "customer"
+    },
+    "work_sheets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-sheet.work-sheet",
+      "mappedBy": "customer"
+    }
+  }
+}

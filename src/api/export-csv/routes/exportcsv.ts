@@ -2,8 +2,8 @@ export default {
   routes: [
     // {
     //  method: 'GET',
-    //  path: '/exportcsv',
-    //  handler: 'exportcsv.exampleAction',
+    //  path: '/export-csv',
+    //  handler: 'export-csv.exampleAction',
     //  config: {
     //    policies: [],
     //    middlewares: [],

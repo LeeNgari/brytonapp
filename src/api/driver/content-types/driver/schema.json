@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "drivers",
+  "info": {
+    "singularName": "driver",
+    "pluralName": "drivers",
+    "displayName": "Driver"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "FullName": { "type": "string" },
+    "work_sheets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-sheet.work-sheet",
+      "mappedBy": "driver"
+    }
+  }
+}

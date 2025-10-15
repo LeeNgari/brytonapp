@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invoices",
+  "info": {
+    "singularName": "invoice",
+    "pluralName": "invoices",
+    "displayName": "Invoice"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "InvoiceNumber": {
+      "type": "string",
+      "unique": true
+    },
+    "InvoiceDate": {
+      "type": "date"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "TotalAmount": {
+      "type": "decimal"
+    },
+    "BankDetails": {
+      "type": "text"
+    },
+    "quotation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quotation.quotation",
+      "inversedBy": "invoice"
+    },
+    "customer": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::customer.customer",
+      "inversedBy": "invoices"
+    }
+  }
+}
