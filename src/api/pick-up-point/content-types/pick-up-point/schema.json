@@ -7,7 +7,7 @@
     "displayName": "Pick Up Point"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

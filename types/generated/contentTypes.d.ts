@@ -382,12 +382,14 @@ export interface ApiBoardingPassBoardingPass
     singularName: 'boarding-pass';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    active: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayName: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -395,8 +397,9 @@ export interface ApiBoardingPassBoardingPass
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Qr: Schema.Attribute.UID;
+    Qr: Schema.Attribute.UID<'displayName'>;
     receipt: Schema.Attribute.Relation<'oneToOne', 'api::receipt.receipt'>;
+    semester: Schema.Attribute.Relation<'manyToOne', 'api::semester.semester'>;
     student: Schema.Attribute.Relation<'manyToOne', 'api::student.student'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -412,7 +415,7 @@ export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
     singularName: 'customer';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     Address: Schema.Attribute.Text;
@@ -453,7 +456,7 @@ export interface ApiDriverDriver extends Struct.CollectionTypeSchema {
     singularName: 'driver';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -485,7 +488,7 @@ export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
     singularName: 'invoice';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     BankDetails: Schema.Attribute.Text;
@@ -523,7 +526,7 @@ export interface ApiMileageTrackerMileageTracker
     singularName: 'mileage-tracker';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -554,7 +557,7 @@ export interface ApiPickUpPointPickUpPoint extends Struct.CollectionTypeSchema {
     singularName: 'pick-up-point';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -585,7 +588,7 @@ export interface ApiPricePrice extends Struct.CollectionTypeSchema {
     singularName: 'price';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -616,7 +619,7 @@ export interface ApiQuotationQuotation extends Struct.CollectionTypeSchema {
     singularName: 'quotation';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -650,9 +653,13 @@ export interface ApiReceiptReceipt extends Struct.CollectionTypeSchema {
     singularName: 'receipt';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    boarding_pass: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::boarding-pass.boarding-pass'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -668,14 +675,13 @@ export interface ApiReceiptReceipt extends Struct.CollectionTypeSchema {
       'api::pick-up-point.pick-up-point'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    ReceiptNumber: Schema.Attribute.String & Schema.Attribute.Unique;
+    ReceiptId: Schema.Attribute.String & Schema.Attribute.Unique;
     semester: Schema.Attribute.Relation<'manyToOne', 'api::semester.semester'>;
     student: Schema.Attribute.Relation<'manyToOne', 'api::student.student'>;
     TotalAmount: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    ValidUntil: Schema.Attribute.Date;
   };
 }
 
@@ -687,10 +693,14 @@ export interface ApiSemesterSemester extends Struct.CollectionTypeSchema {
     singularName: 'semester';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     Active: Schema.Attribute.Boolean;
+    boarding_passes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::boarding-pass.boarding-pass'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -720,7 +730,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
     singularName: 'student';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     Active: Schema.Attribute.Boolean;
@@ -737,7 +747,7 @@ export interface ApiStudentStudent extends Struct.CollectionTypeSchema {
       'api::student.student'
     > &
       Schema.Attribute.Private;
-    Name: Schema.Attribute.String & Schema.Attribute.Required;
+    Name: Schema.Attribute.String;
     pick_up_point: Schema.Attribute.Relation<
       'manyToOne',
       'api::pick-up-point.pick-up-point'
@@ -761,7 +771,7 @@ export interface ApiVehicleVehicle extends Struct.CollectionTypeSchema {
     singularName: 'vehicle';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -793,7 +803,7 @@ export interface ApiWorkSheetWorkSheet extends Struct.CollectionTypeSchema {
     singularName: 'work-sheet';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     ArrivalDate: Schema.Attribute.Date;

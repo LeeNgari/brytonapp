@@ -7,13 +7,12 @@
     "displayName": "Student"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "Name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "StudentId": {
       "type": "string",

@@ -6,7 +6,7 @@
     "pluralName": "vehicles",
     "displayName": "Vehicle"
   },
-  "options": { "draftAndPublish": true },
+  "options": { "draftAndPublish": false },
   "attributes": {
     "NumberPlate": { "type": "string" },
     "work_sheets": {

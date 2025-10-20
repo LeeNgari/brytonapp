@@ -7,7 +7,7 @@
     "displayName": "Work Sheet"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -42,16 +42,16 @@
       "inversedBy": "work_sheets"
     },
     "driver": {
-  "type": "relation",
-  "relation": "manyToOne",
-  "target": "api::driver.driver",
-  "inversedBy": "work_sheets"
-},
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::driver.driver",
+      "inversedBy": "work_sheets"
+    },
     "vehicle": {
-  "type": "relation",
-  "relation": "manyToOne",
-  "target": "api::vehicle.vehicle",
-  "inversedBy": "work_sheets"
-}
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vehicle.vehicle",
+      "inversedBy": "work_sheets"
+    }
   }
 }

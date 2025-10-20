@@ -7,7 +7,7 @@
     "displayName": "Boarding Pass"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -20,13 +20,24 @@
     "receipt": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::receipt.receipt"
+      "target": "api::receipt.receipt",
+      "inversedBy": "boarding_pass"
+    },
+    "displayName": {
+      "type": "string"
     },
     "Qr": {
-      "type": "uid"
+      "type": "uid",
+      "targetField": "displayName"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "semester": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::semester.semester",
+      "inversedBy": "boarding_passes"
     }
-  },
-  "config": {
-    "displayedAttribute": "QrCode"
   }
 }

@@ -7,14 +7,10 @@
     "displayName": "Receipt"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "ReceiptNumber": {
-      "type": "string",
-      "unique": true
-    },
     "PaymentDate": {
       "type": "date"
     },
@@ -36,11 +32,18 @@
       "target": "api::semester.semester",
       "inversedBy": "receipts"
     },
-    "ValidUntil": {
-      "type": "date"
-    },
     "TotalAmount": {
       "type": "string"
+    },
+    "ReceiptId": {
+      "type": "string",
+      "unique": true
+    },
+    "boarding_pass": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::boarding-pass.boarding-pass",
+      "mappedBy": "receipt"
     }
   }
 }
