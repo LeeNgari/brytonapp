@@ -7,7 +7,7 @@ export default [
     config: {
       origin: [
         'http://localhost:5173',
-        'hhttps://bryton-frontend.onrender.com', 
+        'https://bryton-frontend.onrender.com', 
       ],
       credentials: true,
     },
