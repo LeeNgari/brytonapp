@@ -1,17 +1,16 @@
-export default ({ env }) => ({
+const isProd = process.env.NODE_ENV === 'production';
+
+export default () => ({
   'strapi-v5-http-only-auth': {
     enabled: true,
     config: {
       cookieOptions: {
-        secure: env('NODE_ENV') === 'production', 
+        secure: isProd,           
+        sameSite: isProd ? 'none' : 'lax', 
         httpOnly: true,
-        sameSite: env('NODE_ENV') === 'production' ? 'none' : 'lax',
-        domain:
-          env('NODE_ENV') === 'production'
-            ? '.strapiapp.com' 
-            : 'localhost',
+        domain: isProd ? 'best-trust-b5c8149993.strapiapp.com' : 'localhost',
         path: '/',
-        maxAge: 7 * 24 * 60 * 60 * 1000, 
+        maxAge: 7 *   24 * 60 * 60 * 1000,
       },
       deleteJwtFromResponse: true,
     },
